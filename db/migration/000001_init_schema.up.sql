@@ -1,30 +1,31 @@
 CREATE TABLE "subscription" (
-  "subscriber" integer NOT NULL,
-  "target" integer NOT NULL
+  "subscriber" integer,
+  "target" integer
 );
 
 CREATE TABLE "user" (
   "id" integer PRIMARY KEY,
-  "email" varchar(255) NOT NULL,
-  "is_admin" boolean NOT NULL DEFAULT False,
-  "is_active" boolean NOT NULL DEFAULT True,
-  "created_at" timestamptz NOT NULL DEFAULT (now())
+  "email" varchar(255),
+  "password" integer,
+  "is_admin" boolean DEFAULT False,
+  "is_active" boolean DEFAULT True,
+  "created_at" timestamptz DEFAULT (now())
 );
 
 CREATE TABLE "profile" (
   "user" integer,
-  "post_count" integer NOT NULL DEFAULT 0,
-  "subscriber_count" NOT NULL integer DEFAULT 0,
-  "subscription_count" NOT NULL integer DEFAULT 0,
+  "post_count" integer DEFAULT 0,
+  "subscriber_count" integer DEFAULT 0,
+  "subscription_count" integer DEFAULT 0,
   "bio" varchar(1000)
 );
 
 CREATE TABLE "post" (
   "slug" varchar(100) PRIMARY KEY,
   "title" varchar(100) UNIQUE,
-  "body" text NOT NULL,
-  "author" integer NOT NULL,
-  "created_at" timestamptz NOT NULL DEFAULT (now())
+  "body" text,
+  "author" integer,
+  "created_at" timestamptz DEFAULT (now())
 );
 
 COMMENT ON COLUMN "profile"."post_count" IS 'positive';
