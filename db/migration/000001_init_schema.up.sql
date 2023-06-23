@@ -6,7 +6,7 @@ CREATE TABLE "subscription" (
 CREATE TABLE "user" (
   "id" integer PRIMARY KEY,
   "email" varchar(255) NOT NULL,
-  "password" integer NOT NULL,
+  "hashed_password" integer NOT NULL,
   "is_admin" boolean DEFAULT False NOT NULL,
   "is_active" boolean DEFAULT True NOT NULL,
   "created_at" timestamptz DEFAULT (now()) NOT NULL

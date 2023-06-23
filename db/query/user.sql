@@ -1,7 +1,7 @@
 -- name: CreateUser :one
 INSERT INTO "user" (
   email,
-  password,
+  hashed_password,
   is_admin,
   is_active
 ) VALUES (
@@ -20,7 +20,7 @@ OFFSET $2;
 
 -- name: UpdateUser :exec
 UPDATE "user"
-SET password = $2
+SET hashed_password = $2
 WHERE id = $1;
 
 -- name: DeleteUser :exec
