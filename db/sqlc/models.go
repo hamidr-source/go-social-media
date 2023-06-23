@@ -19,7 +19,7 @@ type Post struct {
 }
 
 type Profile struct {
-	User int32 `json:"user"`
+	UserID int32 `json:"user_id"`
 	// positive
 	PostCount int32 `json:"post_count"`
 	// positive

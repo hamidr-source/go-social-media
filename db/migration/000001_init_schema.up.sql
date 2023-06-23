@@ -13,7 +13,7 @@ CREATE TABLE "user" (
 );
 
 CREATE TABLE "profile" (
-  "user" integer NOT NULL,
+  "user_id" integer NOT NULL,
   "post_count" integer DEFAULT 0 NOT NULL,
   "subscriber_count" integer DEFAULT 0 NOT NULL,
   "subscription_count" integer DEFAULT 0 NOT NULL,
@@ -42,4 +42,4 @@ ALTER TABLE "subscription" ADD FOREIGN KEY ("subscriber") REFERENCES "user" ("id
 
 ALTER TABLE "subscription" ADD FOREIGN KEY ("target") REFERENCES "user" ("id");
 
-ALTER TABLE "profile" ADD FOREIGN KEY ("user") REFERENCES "user" ("id");
+ALTER TABLE "profile" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
