@@ -22,7 +22,7 @@ CREATE TABLE "profile" (
 
 CREATE TABLE "post" (
   "id" integer PRIMARY KEY, 
-  "title" varchar(100) UNIQUE,
+  "title" varchar(100) UNIQUE NOT NULL,
   "body" text NOT NULL,
   "author" integer NOT NULL,
   "created_at" timestamptz DEFAULT (now()) NOT NULL

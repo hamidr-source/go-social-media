@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 const createPost = `-- name: CreatePost :one
@@ -21,9 +20,9 @@ INSERT INTO "post" (
 `
 
 type CreatePostParams struct {
-	Title  sql.NullString `json:"title"`
-	Body   string         `json:"body"`
-	Author int32          `json:"author"`
+	Title  string `json:"title"`
+	Body   string `json:"body"`
+	Author int32  `json:"author"`
 }
 
 func (q *Queries) CreatePost(ctx context.Context, arg CreatePostParams) (Post, error) {

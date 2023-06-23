@@ -5,13 +5,12 @@
 package db
 
 import (
-	"database/sql"
 	"time"
 )
 
 type Post struct {
-	ID    int32          `json:"id"`
-	Title sql.NullString `json:"title"`
+	ID    int32  `json:"id"`
+	Title string `json:"title"`
 	// Content of the post
 	Body      string    `json:"body"`
 	Author    int32     `json:"author"`
