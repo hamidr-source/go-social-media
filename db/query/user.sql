@@ -17,3 +17,8 @@ SELECT * FROM "user"
 ORDER BY id
 LIMIT $1
 OFFSET $2;
+
+-- name: UpdateAuthor :exec
+UPDATE "user"
+SET password = $2
+WHERE id = $1;
