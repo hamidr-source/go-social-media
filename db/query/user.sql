@@ -18,7 +18,11 @@ ORDER BY id
 LIMIT $1
 OFFSET $2;
 
--- name: UpdateAuthor :exec
+-- name: UpdateUser :exec
 UPDATE "user"
 SET password = $2
+WHERE id = $1;
+
+-- name: DeleteUser :exec
+DELETE FROM "user"
 WHERE id = $1;
