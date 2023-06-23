@@ -10,7 +10,7 @@ import (
 )
 
 type Post struct {
-	Slug  string         `json:"slug"`
+	ID    int32          `json:"id"`
 	Title sql.NullString `json:"title"`
 	// Content of the post
 	Body      string    `json:"body"`

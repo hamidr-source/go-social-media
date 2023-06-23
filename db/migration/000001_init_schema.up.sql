@@ -21,7 +21,7 @@ CREATE TABLE "profile" (
 );
 
 CREATE TABLE "post" (
-  "slug" varchar(100) PRIMARY KEY, 
+  "id" integer PRIMARY KEY, 
   "title" varchar(100) UNIQUE,
   "body" text NOT NULL,
   "author" integer NOT NULL,
