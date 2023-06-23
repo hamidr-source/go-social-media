@@ -6,38 +6,39 @@ package db
 
 import (
 	"database/sql"
+	"time"
 )
 
 type Post struct {
 	Slug  string         `json:"slug"`
 	Title sql.NullString `json:"title"`
 	// Content of the post
-	Body      sql.NullString `json:"body"`
-	Author    sql.NullInt32  `json:"author"`
-	CreatedAt sql.NullTime   `json:"created_at"`
+	Body      string    `json:"body"`
+	Author    int32     `json:"author"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 type Profile struct {
-	User sql.NullInt32 `json:"user"`
+	User int32 `json:"user"`
 	// positive
-	PostCount sql.NullInt32 `json:"post_count"`
+	PostCount int32 `json:"post_count"`
 	// positive
-	SubscriberCount sql.NullInt32 `json:"subscriber_count"`
+	SubscriberCount int32 `json:"subscriber_count"`
 	// positive
-	SubscriptionCount sql.NullInt32  `json:"subscription_count"`
-	Bio               sql.NullString `json:"bio"`
+	SubscriptionCount int32  `json:"subscription_count"`
+	Bio               string `json:"bio"`
 }
 
 type Subscription struct {
-	Subscriber sql.NullInt32 `json:"subscriber"`
-	Target     sql.NullInt32 `json:"target"`
+	Subscriber int32 `json:"subscriber"`
+	Target     int32 `json:"target"`
 }
 
 type User struct {
-	ID        int32          `json:"id"`
-	Email     sql.NullString `json:"email"`
-	Password  sql.NullInt32  `json:"password"`
-	IsAdmin   sql.NullBool   `json:"is_admin"`
-	IsActive  sql.NullBool   `json:"is_active"`
-	CreatedAt sql.NullTime   `json:"created_at"`
+	ID        int32     `json:"id"`
+	Email     string    `json:"email"`
+	Password  int32     `json:"password"`
+	IsAdmin   bool      `json:"is_admin"`
+	IsActive  bool      `json:"is_active"`
+	CreatedAt time.Time `json:"created_at"`
 }

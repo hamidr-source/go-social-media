@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 const createUser = `-- name: CreateUser :one
@@ -22,10 +21,10 @@ INSERT INTO "user" (
 `
 
 type CreateUserParams struct {
-	Email    sql.NullString `json:"email"`
-	Password sql.NullInt32  `json:"password"`
-	IsAdmin  sql.NullBool   `json:"is_admin"`
-	IsActive sql.NullBool   `json:"is_active"`
+	Email    string `json:"email"`
+	Password int32  `json:"password"`
+	IsAdmin  bool   `json:"is_admin"`
+	IsActive bool   `json:"is_active"`
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
