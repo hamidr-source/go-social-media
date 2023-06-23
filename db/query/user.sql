@@ -7,3 +7,13 @@ INSERT INTO "user" (
 ) VALUES (
   $1, $2, $3, $4
 ) RETURNING *;
+
+-- name: GetUser :one
+SELECT * FROM "user"
+WHERE id = $1 LIMIT 1;
+
+-- name: ListUser :many
+SELECT * FROM "user"
+ORDER BY id
+LIMIT $1
+OFFSET $2;
