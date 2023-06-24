@@ -12,25 +12,25 @@ import (
 const createUser = `-- name: CreateUser :one
 INSERT INTO "user" (
   email,
-  password,
+  hashed_password,
   is_admin,
   is_active
 ) VALUES (
   $1, $2, $3, $4
-) RETURNING id, email, password, is_admin, is_active, created_at
+) RETURNING id, email, hashed_password, is_admin, is_active, created_at
 `
 
 type CreateUserParams struct {
-	Email    string `json:"email"`
-	Password int32  `json:"password"`
-	IsAdmin  bool   `json:"is_admin"`
-	IsActive bool   `json:"is_active"`
+	Email          string `json:"email"`
+	HashedPassword int32  `json:"hashed_password"`
+	IsAdmin        bool   `json:"is_admin"`
+	IsActive       bool   `json:"is_active"`
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
 	row := q.db.QueryRowContext(ctx, createUser,
 		arg.Email,
-		arg.Password,
+		arg.HashedPassword,
 		arg.IsAdmin,
 		arg.IsActive,
 	)
@@ -38,7 +38,7 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 	err := row.Scan(
 		&i.ID,
 		&i.Email,
-		&i.Password,
+		&i.HashedPassword,
 		&i.IsAdmin,
 		&i.IsActive,
 		&i.CreatedAt,
@@ -57,7 +57,7 @@ func (q *Queries) DeleteUser(ctx context.Context, id int32) error {
 }
 
 const getUser = `-- name: GetUser :one
-SELECT id, email, password, is_admin, is_active, created_at FROM "user"
+SELECT id, email, hashed_password, is_admin, is_active, created_at FROM "user"
 WHERE id = $1 LIMIT 1
 `
 
@@ -67,7 +67,7 @@ func (q *Queries) GetUser(ctx context.Context, id int32) (User, error) {
 	err := row.Scan(
 		&i.ID,
 		&i.Email,
-		&i.Password,
+		&i.HashedPassword,
 		&i.IsAdmin,
 		&i.IsActive,
 		&i.CreatedAt,
@@ -76,7 +76,7 @@ func (q *Queries) GetUser(ctx context.Context, id int32) (User, error) {
 }
 
 const listUser = `-- name: ListUser :many
-SELECT id, email, password, is_admin, is_active, created_at FROM "user"
+SELECT id, email, hashed_password, is_admin, is_active, created_at FROM "user"
 ORDER BY id
 LIMIT $1
 OFFSET $2
@@ -99,7 +99,7 @@ func (q *Queries) ListUser(ctx context.Context, arg ListUserParams) ([]User, err
 		if err := rows.Scan(
 			&i.ID,
 			&i.Email,
-			&i.Password,
+			&i.HashedPassword,
 			&i.IsAdmin,
 			&i.IsActive,
 			&i.CreatedAt,
@@ -119,16 +119,16 @@ func (q *Queries) ListUser(ctx context.Context, arg ListUserParams) ([]User, err
 
 const updateUser = `-- name: UpdateUser :exec
 UPDATE "user"
-SET password = $2
+SET hashed_password = $2
 WHERE id = $1
 `
 
 type UpdateUserParams struct {
-	ID       int32 `json:"id"`
-	Password int32 `json:"password"`
+	ID             int32 `json:"id"`
+	HashedPassword int32 `json:"hashed_password"`
 }
 
 func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) error {
-	_, err := q.db.ExecContext(ctx, updateUser, arg.ID, arg.Password)
+	_, err := q.db.ExecContext(ctx, updateUser, arg.ID, arg.HashedPassword)
 	return err
 }

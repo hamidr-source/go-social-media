@@ -4,7 +4,7 @@ CREATE TABLE "subscription" (
 );
 
 CREATE TABLE "user" (
-  "id" integer PRIMARY KEY,
+  "id" integer PRIMARY KEY NOT NULL,
   "email" varchar(255) NOT NULL,
   "hashed_password" integer NOT NULL,
   "is_admin" boolean DEFAULT False NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE "profile" (
 );
 
 CREATE TABLE "post" (
-  "id" integer PRIMARY KEY, 
+  "id" integer PRIMARY KEY NOT NULL, 
   "title" varchar(100) UNIQUE NOT NULL,
   "body" text NOT NULL,
   "author" integer NOT NULL,

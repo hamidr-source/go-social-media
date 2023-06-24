@@ -10,7 +10,7 @@ import (
 func TestCreateUser(t *testing.T) {
 	arg := CreateUserParams {
 		Email: "hr454837@gmail.com",
-		// Password: 1111,
+		HashedPassword: 11111,
 		IsAdmin: true,
 		IsActive: true,
 	}
@@ -20,7 +20,7 @@ func TestCreateUser(t *testing.T) {
 	require.NotEmpty(t, user)
 
 	require.Equal(t, arg.Email, user.Email)
-	// require.Equal(t, arg.Password, user.Password)
+	require.Equal(t, arg.HashedPassword, user.HashedPassword)
 	require.Equal(t, arg.IsAdmin, user.IsAdmin)
 	require.Equal(t, arg.IsActive, user.IsActive)
 

@@ -34,10 +34,10 @@ type Subscription struct {
 }
 
 type User struct {
-	ID        int32     `json:"id"`
-	Email     string    `json:"email"`
-	Password  int32     `json:"password"`
-	IsAdmin   bool      `json:"is_admin"`
-	IsActive  bool      `json:"is_active"`
-	CreatedAt time.Time `json:"created_at"`
+	ID             int32     `json:"id"`
+	Email          string    `json:"email"`
+	HashedPassword int32     `json:"hashed_password"`
+	IsAdmin        bool      `json:"is_admin"`
+	IsActive       bool      `json:"is_active"`
+	CreatedAt      time.Time `json:"created_at"`
 }
